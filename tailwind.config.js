@@ -16,11 +16,16 @@ export default {
         baseTitle: "#E7EDF4",
         baseText: "#AFC2D4",
         brandBlue: "#3294F8",
-        
+
       },
       fontFamily: {
         sans: "Nunito",
       },
+    },
+  },
+  variants: {
+    extend: {
+      lineClamp: ['responsive', 'hover'],
     },
   },
   plugins: [],
