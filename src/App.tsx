@@ -10,7 +10,7 @@ const router = createBrowserRouter([
     element: <DetailsProfileGithub />
   },
   {
-    path: "/detailsRepository/:repositoryId",
+    path: "/Repository/:username/:repoName",
     element: <AllDetailsRepository />
   }
 ])

@@ -1,7 +1,7 @@
-import { format } from 'date-fns';
-import { ptBR } from 'date-fns/locale';
 import { ExternalLink } from 'lucide-react'
 import { useEffect, useState } from 'react'
+import { Link } from 'react-router-dom';
+import { Header } from '../../components/header';
 
 
 interface RepositoryProps {
@@ -9,6 +9,10 @@ interface RepositoryProps {
   name: string;
   updated_at: string;
   description: string;
+  html_url: string;
+  owner: {
+    login: string;
+  };
 }
 
 interface UserProps {
@@ -46,11 +50,8 @@ export function DetailsProfileGithub() {
 
   return (
     <div className='w-screen min-h-screen max-w-full pb-10'>
-      <header className='h-1/3 w-full flex justify-between'>
-        <img src="/Cover.png" alt="" className='flex-1' />
-      </header>
+      <Header />
       <main className='w-[864px] h-2/3 m-auto relative bg-base flex flex-col'>
-
         {user && (
           <div className='bg-baseCard w-full h-52 absolute -top-24 rounded-[10px] flex items-center gap-8 px-8'>
             <div className='w-36 h-36'>
@@ -103,17 +104,16 @@ export function DetailsProfileGithub() {
           </div>
         </div>
         <div className='flex flex-wrap gap-8'>
-          {repositories.map(repository => {
-            return (
-              <div key={repository.id} className='bg-baseCard w-[48%] h-64 mt-10 rounded-[10px] p-8 flex flex-col gap-6'>
+          {repositories.map(repository => (
+              <Link to={`/repository/${repository.owner.login}/${repository.name}`} key={repository.id} className='bg-baseCard w-[48%] h-64 mt-10 rounded-[10px] p-8 flex flex-col gap-6'>
                 <div className='flex gap-1'>
                   <h1 className='text-baseTitle font-bold text-xl w-[70%]'>{repository.name}</h1>
                   <span className='text-baseText text-sm mt-1'>{calculateDaysAgo(repository.updated_at)} dias atrás</span>
                 </div>
                 {repository.description === null ? <span className='line-clamp-4 text-baseText'>Without description</span>: <span className='line-clamp-4 text-baseText'>{repository.description}</span> }
-              </div>
+              </Link>
             )
-          })}
+          )}
         </div>
       </main>
     </div>
