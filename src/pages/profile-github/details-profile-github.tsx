@@ -27,6 +27,7 @@ interface UserProps {
 export function DetailsProfileGithub() {
   const [user, setUser] = useState<UserProps | null>(null);
   const [repositories, setRepositories] = useState<RepositoryProps[]>([])
+  const [searchQuery, setSearchQuery] = useState<string>('');
 
   useEffect(() => {
     fetch("https://api.github.com/users/weslleyolli")
@@ -39,6 +40,26 @@ export function DetailsProfileGithub() {
       .then(response => response.json())
       .then(data => setRepositories(data))
   }, [])
+
+  useEffect(() => {
+    if (searchQuery.trim() === '') {
+      fetch("https://api.github.com/users/weslleyolli/repos")
+        .then(response => response.json())
+        .then(data => setRepositories(data));
+      return;
+    }
+
+    const handleSearch = () => {
+      fetch(`https://api.github.com/search/repositories?q=${searchQuery}+user:weslleyolli`)
+        .then(response => response.json())
+        .then(data => setRepositories(data.items))
+        .catch(error => console.error('Error fetching repositories:', error));
+    };
+
+    const debounce = setTimeout(handleSearch, 300);
+
+    return () => clearTimeout(debounce);
+  }, [searchQuery]);
 
   const calculateDaysAgo = (dateString: string) => {
     const date = new Date(dateString);
@@ -99,7 +120,9 @@ export function DetailsProfileGithub() {
             <input
               type="text"
               placeholder='Search content'
-              className='bg-baseInput w-full h-12 px-6 text-baseText placeholder:opacity-60'
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className='bg-baseInput w-full h-12 px-6 text-baseText placeholder:opacity-60 focus:outline-none'            
             />
           </div>
         </div>
