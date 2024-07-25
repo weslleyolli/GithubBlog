@@ -2,6 +2,7 @@ import { ExternalLink } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { Link } from 'react-router-dom';
 import { Header } from '../../components/header';
+import { SearchForm } from '../../components/seachForm';
 
 
 interface RepositoryProps {
@@ -28,6 +29,7 @@ export function DetailsProfileGithub() {
   const [user, setUser] = useState<UserProps | null>(null);
   const [repositories, setRepositories] = useState<RepositoryProps[]>([])
   const [searchQuery, setSearchQuery] = useState<string>('');
+  
 
   useEffect(() => {
     fetch("https://api.github.com/users/weslleyolli")
@@ -116,15 +118,7 @@ export function DetailsProfileGithub() {
             <h1 className='text-baseTitle font-bold text-2xl'>Publications</h1>
             <span className='text-baseText'>6 Publications</span>
           </div>
-          <div>
-            <input
-              type="text"
-              placeholder='Search content'
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className='bg-baseInput w-full h-12 px-6 text-baseText placeholder:opacity-60 focus:outline-none'            
-            />
-          </div>
+          <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
         <div className='flex flex-wrap gap-8'>
           {repositories.map(repository => (
