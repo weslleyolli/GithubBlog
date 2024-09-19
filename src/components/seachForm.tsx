@@ -1,15 +1,4 @@
-import { useEffect, useState } from "react";
-
-interface RepositoryProps {
-  id: number;
-  name: string;
-  updated_at: string;
-  description: string;
-  html_url: string;
-  owner: {
-    login: string;
-  };
-}
+import { useEffect } from "react";
 
 interface SearchFormProps {
   searchQuery: string;
@@ -17,20 +6,18 @@ interface SearchFormProps {
 }
 
 export function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
-  const [repositories, setRepositories] = useState<RepositoryProps[]>([]);
-
   useEffect(() => {
     if (searchQuery.trim() === '') {
       fetch("https://api.github.com/users/weslleyolli/repos")
         .then(response => response.json())
-        .then(data => setRepositories(data));
+        .then(data => console.log(data)); // Faz algo com os dados, se necessário
       return;
     }
 
     const handleSearch = () => {
       fetch(`https://api.github.com/search/repositories?q=${searchQuery}+user:weslleyolli`)
         .then(response => response.json())
-        .then(data => setRepositories(data.items))
+        .then(data => console.log(data.items)) // Faz algo com os dados, se necessário
         .catch(error => console.error('Error fetching repositories:', error));
     };
 
