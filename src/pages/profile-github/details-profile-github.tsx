@@ -23,6 +23,7 @@ interface UserProps {
   followers: number
   login: string
   company: string
+  public_repos: number
 }
 
 export function DetailsProfileGithub() {
@@ -111,12 +112,10 @@ export function DetailsProfileGithub() {
           </div>
         )
         }
-
-
         <div className='w-full mt-44 flex flex-col gap-4'>
           <div className='flex justify-between items-center'>
             <h1 className='text-baseTitle font-bold text-2xl'>Publications</h1>
-            <span className='text-baseText'>6 Publications</span>
+            <span className='text-baseText'>{user?.public_repos} Publications</span>
           </div>
           <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
