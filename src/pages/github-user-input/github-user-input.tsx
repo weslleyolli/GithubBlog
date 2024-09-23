@@ -8,7 +8,7 @@ export function GitHubUserInput() {
     const navigate = useNavigate();
 
     const handleSearch = async () => {
-        setError(null); // Limpar qualquer erro anterior
+        setError(null);
       
         if (!username.trim()) {
           setError('Please enter a GitHub username.');
@@ -23,7 +23,7 @@ export function GitHubUserInput() {
           } else if (!response.ok) {
             throw new Error('Something went wrong.');
           } else {
-            navigate(`/profile/${username}`); // Apenas para visualizar
+            navigate(`/profile/${username}`);
           }
         } catch (err) {
           setError('Something went wrong while fetching the user.');
@@ -35,11 +35,8 @@ export function GitHubUserInput() {
             <div className="w-full">
                 <Header />
             </div>
-
-            {/* Itens centralizados */}
             <div className="flex-grow flex flex-col items-center justify-center">
                 <h1 className="text-baseTitle font-bold text-xl md:text-3xl mb-6">Enter your GitHub username</h1>
-
                 <input
                     type="text"
                     placeholder="GitHub username"
@@ -52,18 +49,14 @@ export function GitHubUserInput() {
                     }}
                     className="bg-baseInput w-4/5 md:w-2/4 h-12 px-6 text-baseText placeholder:opacity-60 focus:outline-none mt-4"
                 />
-
                 <button
                     onClick={handleSearch}
                     className="bg-baseCard text-white p-2 rounded mt-6 w-32 hover:bg-opacity-80 transition-colors duration-200"
                 >
                     Search
                 </button>
-
-                {/* Mensagem de erro exibida se o usuário não existir */}
                 {error && <p className="text-red-500 mt-4">{error}</p>}
             </div>
         </div>
-
     );
 }

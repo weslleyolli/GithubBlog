@@ -10,14 +10,14 @@ export function SearchForm({ searchQuery, setSearchQuery }: SearchFormProps) {
     if (searchQuery.trim() === '') {
       fetch("https://api.github.com/users/weslleyolli/repos")
         .then(response => response.json())
-        .then(data => console.log(data)); // Faz algo com os dados, se necessário
+        .then(data => console.log(data));
       return;
     }
 
     const handleSearch = () => {
       fetch(`https://api.github.com/search/repositories?q=${searchQuery}+user:weslleyolli`)
         .then(response => response.json())
-        .then(data => console.log(data.items)) // Faz algo com os dados, se necessário
+        .then(data => console.log(data.items))
         .catch(error => console.error('Error fetching repositories:', error));
     };
 

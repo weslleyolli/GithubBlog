@@ -27,7 +27,7 @@ interface UserProps {
 }
 
 export function DetailsProfileGithub() {
-  const { username } = useParams<{ username: string }>(); // Recebe o username da URL
+  const { username } = useParams<{ username: string }>();
   const [user, setUser] = useState<UserProps | null>(null);
   const [repositories, setRepositories] = useState<RepositoryProps[]>([]);
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -51,12 +51,9 @@ export function DetailsProfileGithub() {
   return (
     <div className="w-screen min-h-screen max-w-full pb-10">
       <Header />
-
       <main className="w-full md:w-[864px] h-2/3 mx-auto relative bg-base flex flex-col p-4">
         {user && (
           <div className="bg-baseCard w-full h-auto md:h-52 relative md:absolute -top-0 pt-8 pb-8 md:pt-0 md:pb-0 md:-top-24 rounded-[10px] flex flex-col md:flex-row items-center gap-4 md:gap-8 px-4 md:px-8">
-
-            {/* Divs GITHUB e LOGOUT no topo no mobile (lado a lado com o máximo de espaçamento) */}
             <div className="flex flex-row justify-between items-center w-full md:hidden">
               <a href={`https://github.com/${user.login}`}>
                 <div className="flex gap-2 items-center hover:scale-105 transform transition-transform duration-200 cursor-pointer">
@@ -68,17 +65,12 @@ export function DetailsProfileGithub() {
                 <LogoutButton />
               </div>
             </div>
-
-            {/* Imagem de perfil */}
             <div className="w-20 h-20 md:w-36 md:h-36">
               <img className="rounded-lg" src={user.avatar_url} alt={user.name} />
             </div>
-
             <div className="flex flex-col gap-4 w-full">
               <div className="flex flex-col md:flex-row justify-between w-full md:w-[612px]">
                 <h1 className="text-baseTitle font-bold text-lg md:text-2xl">{user.name}</h1>
-
-                {/* Divs GITHUB e LOGOUT no desktop */}
                 <div className="hidden md:flex gap-4 items-center">
                   <a href={`https://github.com/${user.login}`}>
                     <div className="flex gap-2 items-center hover:scale-105 transform transition-transform duration-200 cursor-pointer">

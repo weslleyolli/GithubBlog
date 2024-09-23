@@ -51,7 +51,6 @@ export function AllDetailsRepository() {
     <div className='w-screen min-h-screen max-w-full pb-10'>
       <Header />
       <main className='w-full max-w-[864px] h-auto md:h-2/3 mx-auto relative bg-base flex flex-col p-4 md:p-0'>
-        {/* Removendo o absolute no mobile, mantendo no desktop */}
         <div className='bg-baseCard w-full h-auto md:h-52 rounded-[10px] flex flex-col gap-4 md:gap-8 p-4 md:p-8 md:absolute md:-top-24'>
           <div className="flex w-full justify-between">
             <Link to={`/profile/${username}`} className="flex items-center gap-2">
