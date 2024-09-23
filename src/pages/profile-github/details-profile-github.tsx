@@ -94,7 +94,7 @@ export function DetailsProfileGithub() {
               <div>
                 <span className="text-baseText text-sm md:text-base">{user.bio}</span>
               </div>
-              <div className="flex flex-row flex-wrap justify-between gap-2 md:gap-6 items-center w-full">
+              <div className="flex flex-row flex-wrap gap-2 items-center w-full md:gap-6">
                 <div className="text-baseText flex items-center gap-1 text-xs md:text-base">
                   <img src="/Github.png" alt="Github" className="w-4 h-4 md:w-5 md:h-5" />
                   <span>{user.login}</span>
@@ -108,12 +108,10 @@ export function DetailsProfileGithub() {
                   <span>{`${user.followers} followers`}</span>
                 </div>
               </div>
+
             </div>
           </div>
         )}
-
-
-
         <div className="w-full mt-5 md:mt-44 flex flex-col gap-4">
           <div className="flex justify-between items-center">
             <h1 className="text-baseTitle font-bold text-xl md:text-2xl">Publications</h1>
@@ -121,7 +119,7 @@ export function DetailsProfileGithub() {
           </div>
           <SearchForm searchQuery={searchQuery} setSearchQuery={setSearchQuery} />
         </div>
-        <div className="flex flex-wrap gap-4 md:gap-8">
+        <div className="flex flex-wrap gap-1 md:gap-8">
           {repositories.map((repository) => (
             <a
               href={`/repository/${repository.owner.login}/${repository.name}`}
