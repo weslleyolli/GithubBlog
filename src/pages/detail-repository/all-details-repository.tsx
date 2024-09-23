@@ -1,4 +1,4 @@
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { Header } from '../../components/header';
 import { ChevronLeft, ExternalLink } from 'lucide-react';
@@ -15,7 +15,7 @@ interface RepositoryProps {
 }
 
 export function AllDetailsRepository() {
-    const { username, repoName } = useParams<{ username: string; repoName: string }>();
+  const { username, repoName } = useParams<{ username: string; repoName: string }>();
   const [repository, setRepository] = useState<RepositoryProps | null>(null);
 
   useEffect(() => {
@@ -53,10 +53,10 @@ export function AllDetailsRepository() {
       <main className='w-[864px] h-2/3 m-auto relative bg-base flex flex-col'>
         <div className='bg-baseCard w-full h-52 absolute -top-24 rounded-[10px] flex flex-col gap-8 p-8 '>
           <div className="flex w-full justify-between">
-            <a href="/" className="flex">
+            <Link to={`/profile/${username}`} className="flex">
               <ChevronLeft className='text-brandBlue size-5' />
               <span className='font-bold text-sm text-brandBlue mt-[1px]'>BACK</span>
-            </a>
+            </Link>
             <a href={repository.html_url} className="flex gap-1">
               <span className='font-bold text-sm text-brandBlue mt-0.5'>SEE ON GITHUB</span>
               <ExternalLink className='text-brandBlue size-5' />

@@ -3,11 +3,16 @@ import { DetailsProfileGithub } from './pages/profile-github/details-profile-git
 
 import './Styles.css'
 import { AllDetailsRepository } from './pages/detail-repository/all-details-repository'
+import { GitHubUserInput } from './pages/github-user-input/github-user-input'
 
 const router = createBrowserRouter([
   {
     path: "/",
-    element: <DetailsProfileGithub />
+    element: <GitHubUserInput />,
+  },
+  {
+    path: "/profile/:username",
+    element: <DetailsProfileGithub />,
   },
   {
     path: "/Repository/:username/:repoName",
